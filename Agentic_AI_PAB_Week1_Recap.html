@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Agentic AI PAB — Week 1 Recap</title>
+<style>
+  :root {
+    --pab-navy: #1B2350;
+    --pab-teal: #1B5566;
+    --pab-orange: #E89461;
+    --pab-magenta: #C94B7F;
+    --pab-purple: #6B4D9A;
+    --ink: #1F2330;
+    --muted: #5B6275;
+    --line: #E3E6EE;
+    --bg: #F7F8FB;
+    --card: #FFFFFF;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    font-family: "Segoe UI", -apple-system, BlinkMacSystemFont, Roboto, sans-serif;
+    color: var(--ink);
+    background: var(--bg);
+    line-height: 1.55;
+  }
+  .container { max-width: 960px; margin: 0 auto; background: var(--card); box-shadow: 0 2px 24px rgba(27,35,80,.08); }
+
+  .banner {
+    position: relative;
+    background: linear-gradient(120deg, #1B2350 0%, #1B5566 38%, #6B4D9A 65%, #C94B7F 85%, #E89461 100%);
+    color: #fff;
+    padding: 48px 56px 56px;
+    overflow: hidden;
+  }
+  .banner::after {
+    content: "";
+    position: absolute; inset: 0;
+    background:
+      radial-gradient(closest-side at 30% 80%, rgba(27,85,102,.55), transparent 60%),
+      radial-gradient(closest-side at 80% 20%, rgba(232,148,97,.45), transparent 65%);
+    pointer-events: none;
+  }
+  .banner-inner { position: relative; z-index: 1; }
+  .pab-pill {
+    display: inline-block;
+    background: linear-gradient(90deg, #36C28F, #E89461, #C94B7F, #6B4D9A);
+    color: #fff; font-weight: 800; letter-spacing: 1px;
+    padding: 4px 14px; border-radius: 6px; font-size: 14px;
+  }
+  h1 {
+    font-size: 38px; margin: 16px 0 6px; font-weight: 700; letter-spacing: -0.3px;
+  }
+  .subtitle { font-size: 17px; opacity: .92; }
+
+  .content { padding: 36px 56px 48px; }
+  h2 {
+    font-size: 22px;
+    margin: 36px 0 14px;
+    color: var(--pab-navy);
+    border-left: 4px solid var(--pab-magenta);
+    padding-left: 12px;
+  }
+  h3 { font-size: 17px; margin: 22px 0 8px; color: var(--pab-teal); }
+  p { margin: 10px 0; }
+  a { color: var(--pab-magenta); text-decoration: none; }
+  a:hover { text-decoration: underline; }
+
+  .nda {
+    background: #FFF6E6; border-left: 4px solid var(--pab-orange);
+    padding: 10px 14px; border-radius: 4px; font-size: 14px; margin: 14px 0 22px;
+  }
+
+  ul.themes { padding-left: 0; list-style: none; }
+  ul.themes li {
+    padding: 10px 14px 10px 36px;
+    margin: 8px 0;
+    background: #F2F4FA;
+    border-radius: 6px;
+    position: relative;
+  }
+  ul.themes li::before {
+    content: "▶";
+    color: var(--pab-magenta);
+    position: absolute; left: 14px; top: 10px;
+    font-size: 12px;
+  }
+
+  .day-card {
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    margin: 18px 0 24px;
+    overflow: hidden;
+  }
+  .day-head {
+    padding: 14px 18px;
+    color: #fff;
+    font-weight: 600;
+  }
+  .day-1 .day-head { background: linear-gradient(90deg, var(--pab-navy), var(--pab-teal)); }
+  .day-2 .day-head { background: linear-gradient(90deg, var(--pab-purple), var(--pab-magenta)); }
+  .day-3 .day-head { background: linear-gradient(90deg, var(--pab-magenta), var(--pab-orange)); }
+  .day-head .day-title { font-size: 18px; }
+  .day-body { padding: 16px 18px; }
+  .meta { font-size: 14px; color: var(--muted); margin: 4px 0 12px; }
+  .takeaway {
+    background: #EEF3FA;
+    border-left: 4px solid var(--pab-teal);
+    padding: 10px 14px;
+    border-radius: 4px;
+    margin: 10px 0 14px;
+    font-size: 14.5px;
+  }
+
+  table.sessions {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 8px;
+    font-size: 14.5px;
+  }
+  table.sessions th {
+    text-align: left;
+    padding: 10px 12px;
+    background: var(--pab-navy);
+    color: #fff;
+    font-weight: 600;
+    font-size: 14px;
+  }
+  table.sessions td {
+    padding: 10px 12px;
+    border-bottom: 1px solid var(--line);
+    vertical-align: top;
+  }
+  table.sessions tr:last-child td { border-bottom: none; }
+  table.sessions tr:nth-child(even) td { background: #FAFBFE; }
+  table.sessions td.title a { font-weight: 600; }
+
+  table.week2 {
+    width: 100%; border-collapse: collapse; margin-top: 10px; font-size: 14.5px;
+  }
+  table.week2 th {
+    text-align: left; background: var(--pab-teal); color: #fff;
+    padding: 10px 12px; font-weight: 600; font-size: 14px;
+  }
+  table.week2 td {
+    padding: 10px 12px; border-bottom: 1px solid var(--line); vertical-align: top;
+  }
+
+  .resources {
+    background: #F2F4FA;
+    border-radius: 8px;
+    padding: 16px 20px;
+    margin: 16px 0;
+  }
+  .resources ul { margin: 8px 0; padding-left: 20px; }
+  .resources li { margin: 4px 0; }
+
+  .photos { margin-top: 28px; }
+  .photos h2 { margin-bottom: 12px; }
+  .photo-grid { display: grid; grid-template-columns: 1fr; gap: 16px; }
+  .photo-grid img { width: 100%; border-radius: 8px; display: block; box-shadow: 0 2px 12px rgba(27,35,80,.1); }
+  .caption { font-size: 13px; color: var(--muted); margin-top: 6px; text-align: center; }
+
+  .signoff {
+    margin-top: 28px; padding-top: 18px; border-top: 1px solid var(--line);
+    color: var(--muted); font-size: 14px;
+  }
+  .signoff strong { color: var(--ink); }
+
+  @media (max-width: 720px) {
+    .banner { padding: 32px 24px; }
+    .content { padding: 24px; }
+    h1 { font-size: 28px; }
+  }
+</style>
+</head>
+<body>
+<div class="container">
+
+  <header class="banner">
+    <div class="banner-inner">
+      <span class="pab-pill">PAB</span>
+      <h1>Agentic AI PAB — Spring 2026</h1>
+      <div class="subtitle">Week 1 Recap &amp; Week 2 Kick-Off · April 27–29, 2026</div>
+    </div>
+  </header>
+
+  <main class="content">
+
+    <p>Hi Partner Advisory Board (PAB),</p>
+    <p>That's a wrap on <strong>Week 1</strong> of our Spring 2026 event! Three half-day sessions shared exclusively with this partner community, covering a packed lineup of senior leaders and product engineering teams from across the Dynamics 365 ecosystem. Thank you to everyone who joined live and shared candid feedback in the polls and chat.</p>
+    <p>This is <em>your</em> advisory board — your opportunity to be heard. We welcome and encourage everyone to share perspectives, ask questions, and provide feedback throughout. These insights play a key role in influencing our strategic direction, and ensuring our joint success.</p>
+
+    <h2>Key themes from Week 1</h2>
+    <ul class="themes">
+      <li><strong>Agentic AI is an enterprise shift</strong> — redefining how customers operate by moving from human-led processes to autonomous, AI-driven decision-making and orchestration across the business.</li>
+      <li><strong>Partner operating model evolution</strong> — moving into high-value services spanning strategic advisory, scalable agent development, enablement and adoption, and managed services for AI solutions.</li>
+      <li><strong>CRM and ERP as the intelligence layer</strong> — pre-built first-party agents now span Sales, Service, Contact Center, Finance &amp; HR, Supply Chain, Project Ops, and Field Service, with partner extensibility via Copilot Studio and MCP.</li>
+      <li><strong>Intelligence + trust as the foundation</strong> — Copilot to bring intelligence into every task, agents to drive autonomous task execution, and Agent 365 as the governed control plane underpinning it all.</li>
+      <li><strong>Governance, security, and Responsible AI front-and-center</strong> — Entra agent IDs, Purview sensitivity labels, Defender prompt-injection protections, and a single admin plane.</li>
+    </ul>
+
+    <h2>At a glance</h2>
+    <div class="nda">⚠️ <strong>Friendly reminder:</strong> the content shared is covered under NDA — please keep it within your organization and do not distribute externally.</div>
+
+    <!-- Day 1 -->
+    <section class="day-card day-1">
+      <div class="day-head"><div class="day-title">Day 1 · Mon, April 27 — All Attendee Session</div></div>
+      <div class="day-body">
+        <p class="meta"><strong>Topics covered:</strong> Microsoft's Executive vision, Copilot + agents, Agent 365, and hearing the Partner voice.</p>
+        <div class="takeaway"><strong>Key takeaway:</strong> Microsoft's agentic strategy is anchored in three layers — Copilot, agents, and Agent 365 as the governed control plane — and partners are central to scaling it.</div>
+        <table class="sessions">
+          <thead>
+            <tr><th>Day 1 — Combined Track — Sessions</th><th>Speakers</th></tr>
+          </thead>
+          <tbody>
+            <tr><td class="title"><a href="https://microsoft.sharepoint.com/:v:/t/CXGPartnerAdvisoryBoardPAB/cQpuUhTvsotURqePeEV92i7YEgUC6b40nRuSsC3iIJLBzRmKEw">Keynote — The Era of Agentic AI</a></td><td>Srini Raghavan</td></tr>
+            <tr><td class="title"><a href="https://microsoft.sharepoint.com/:v:/t/CXGPartnerAdvisoryBoardPAB/cQqWVH1lscuWSK28GWal4ecNEgUCmLubsOM7KefXC7j_pO6d5A">Product Leaders, Top of Mind</a></td><td>Ryan Cunningham; Sigita Cepaitiene; Deva Rajamohan; Darya Mazandarany; Ray Smith</td></tr>
+            <tr><td class="title"><a href="https://microsoft.sharepoint.com/:v:/t/CXGPartnerAdvisoryBoardPAB/cQoVqGcEpcDBSJxbxedU_LueEgUCkfr8XAMinjqeF0bB6bwnQw">Voice of Partner Panel</a></td><td>Select Partners + Sameer Bhangar (host)</td></tr>
+            <tr><td class="title"><a href="https://microsoft.sharepoint.com/:v:/t/CXGPartnerAdvisoryBoardPAB/cQosaFpZCySRTIGvIOpsLMwaEgUC48r9Cgyv6bpBXyHwgYZGYQ">Agent 365 — Governance, Security, and Responsible AI</a></td><td>Sunil Garg</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- Day 2 -->
+    <section class="day-card day-2">
+      <div class="day-head"><div class="day-title">Day 2 · Tues, April 28 — Dynamics 365 CE Session</div></div>
+      <div class="day-body">
+        <p class="meta"><strong>Topics covered:</strong> Strategy and roadmap for Service, Sales, and Contact Center — including "Agentic Dynamics".</p>
+        <div class="takeaway"><strong>Key takeaway:</strong> CE is moving from system-of-record to intelligence layer, with Microsoft's first-party agents natively in platform, and Copilot Studio as the extensibility platform for partners.</div>
+        <table class="sessions">
+          <thead>
+            <tr><th>Day 2 — D365 CE — Sessions</th><th>Speakers</th></tr>
+          </thead>
+          <tbody>
+            <tr><td class="title"><a href="https://microsoft.sharepoint.com/:v:/t/CXGPartnerAdvisoryBoardPAB/cQocmhslLrRQRYr2H_071MtVEgUCb-WgUCuxt_LqM0yhUYSomQ">Keynote — The Future of CRM</a></td><td>Deva Rajamohan; Darya Mazandarany</td></tr>
+            <tr><td class="title"><a href="https://microsoft.sharepoint.com/:v:/t/CXGPartnerAdvisoryBoardPAB/cQrpn3fAq-kQSKkFhTn1Aat9EgUClhgZRXTytSyEe7xJoWL5AQ">Customer Service</a></td><td>Marcus Schmidt; Alan Ross; Edgar Wilson; Saurabh Gupta; Kos Srivastava; Harish Tyagi; Santhosh Kumar Ganesan</td></tr>
+            <tr><td class="title"><a href="https://microsoft.sharepoint.com/:v:/t/CXGPartnerAdvisoryBoardPAB/cQpa6vy4Q7PETr806z_frODaEgUCsz5QzDVoCwLoyV5ZGi8wrQ">Contact Center as a Service</a></td><td>Alpana Bajaj; Tom Neary</td></tr>
+            <tr><td class="title"><a href="https://microsoft.sharepoint.com/:v:/t/CXGPartnerAdvisoryBoardPAB/cQqnPOxyZ-XZTbfsylU9Q0t4EgUCdtrwMAG-MrLxhh8NEN0ClQ">Sales / Customer Insights</a></td><td>Gurkan Salk; Eric Boocock; Deepak Palled; Charlie Hartel; Meenu Laul; Bharath Varadarajan</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- Day 3 -->
+    <section class="day-card day-3">
+      <div class="day-head"><div class="day-title">Day 3 · Wed, April 29 — Dynamics 365 AI ERP Session</div></div>
+      <div class="day-body">
+        <p class="meta"><strong>Topics covered:</strong> The "Next Era of ERP" vision spanning Finance &amp; HR, Supply Chain &amp; Commerce, Project Operations &amp; Field Service, and Agentic Scale with MCP.</p>
+        <div class="takeaway"><strong>Key takeaway:</strong> ERP MCP and Work IQ unlock a three-tier agent model (first-party, partner, custom), with multiple agents already in preview or production and a clear partner activation path.</div>
+        <table class="sessions">
+          <thead>
+            <tr><th>Day 3 — D365 AI ERP — Sessions</th><th>Speakers</th></tr>
+          </thead>
+          <tbody>
+            <tr><td class="title"><a href="https://microsoft.sharepoint.com/:v:/t/CXGPartnerAdvisoryBoardPAB/cQpEEwULR4DPQ4-xG6sNsCdeEgUCL4vQwZ0FeybBz5pPaZQhxg">Keynote — The Next Era of ERP with Dynamics 365</a></td><td>Lachlan Cash; Sam Schotte</td></tr>
+            <tr><td class="title"><a href="https://microsoft.sharepoint.com/:v:/t/CXGPartnerAdvisoryBoardPAB/cQqzTKBAwYvuR4pU4DCjH_pDEgUCTqE9_WBNXL5jSo2aSYwCnw">Agentic Finance, HR &amp; Sustainability</a></td><td>April Olson; Sigita Cepaitiene</td></tr>
+            <tr><td class="title"><a href="https://microsoft.sharepoint.com/:v:/t/CXGPartnerAdvisoryBoardPAB/cQos0IIlU5rATbDOoYcBuSvhEgUCvnWvAdiW4PysKz5CaGYIuA">Agentic Supply Chain &amp; Commerce</a></td><td>Raghav Jandhyala</td></tr>
+            <tr><td class="title"><a href="https://microsoft.sharepoint.com/:v:/t/CXGPartnerAdvisoryBoardPAB/cQoyCvJesFZPRreH28fiQIFFEgUC-Ev3TtYuD-6oppQlFtHMdA">Agentic Project Operations &amp; Field Service</a></td><td>Angelo Briccetti; Luis Masieri</td></tr>
+            <tr><td class="title"><a href="https://microsoft.sharepoint.com/:v:/t/CXGPartnerAdvisoryBoardPAB/cQpos5istk9uQorWJ120KluQEgUC40ca11Ecf30BQmJKGKnBsQ">Dynamics 365 ERP Agent Extensibility</a></td><td>Jared Hall; Barnali Mukherjee; Wei Zhu</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <h2>Resources</h2>
+    <div class="resources">
+      <ul>
+        <li><strong>Agenda:</strong> <a href="https://aka.ms/AgenticAIPAB_Agenda">aka.ms/AgenticAIPAB_Agenda</a></li>
+        <li><strong>Recordings:</strong> Posted to the Teams channel · <a href="http://aka.ms/AgenticAIPAB_Recordings">aka.ms/AgenticAIPAB_Recordings</a> (PowerPoint slides will be provided at the end of the event)</li>
+        <li>A more detailed recap covering deep session content will be shared after the full 6 days of sessions have concluded — via email.</li>
+        <li>For technical support queries, please contact <strong>@hassan</strong> and <strong>@keegan</strong>.</li>
+      </ul>
+    </div>
+
+    <h2>Looking ahead — Week 2</h2>
+    <p>Calendar invites have been shared in readiness; join us for all 3 days, or for the tracks most relevant to your practice.</p>
+    <table class="week2">
+      <thead>
+        <tr><th>Date / Time</th><th>Title</th><th>Join Link</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Mon, May 4<br><span style="color:var(--muted)">8:00 AM – 12:00 PM PT</span></td>
+          <td>Day 4: Power Platform</td>
+          <td><a href="https://aka.ms/AgenticAIPAB_PowerPlatform">aka.ms/AgenticAIPAB_PowerPlatform</a></td>
+        </tr>
+        <tr>
+          <td>Tues, May 5<br><span style="color:var(--muted)">8:00 AM – 12:00 PM PT</span></td>
+          <td>Day 5: Copilot Agent Platform (Part 1)</td>
+          <td><a href="https://aka.ms/AgenticAIPAB_CAP1">aka.ms/AgenticAIPAB_CAP1</a></td>
+        </tr>
+        <tr>
+          <td>Wed, May 6<br><span style="color:var(--muted)">8:00 AM – 12:00 PM PT</span></td>
+          <td>Day 6: Copilot Agent Platform (Part 2)</td>
+          <td><a href="https://aka.ms/AgenticAIPAB_CAP2">aka.ms/AgenticAIPAB_CAP2</a></td>
+        </tr>
+      </tbody>
+    </table>
+
+    <section class="photos">
+      <h2>From Day 1 — Voice of Partner Panel</h2>
+      <div class="photo-grid">
+        <div>
+          <img src="PAB_groupphoto1.png" alt="PAB Voice of Partner panel — group photo 1">
+        </div>
+        <div>
+          <img src="PAB_groupphoto2.png" alt="PAB Voice of Partner panel — group photo 2">
+        </div>
+      </div>
+    </section>
+
+    <div class="signoff">
+      <p>Thanks again for your participation, engagement and questions — we can't wait to hear more on <strong>Monday, May 4</strong> for the start of Week 2.</p>
+      <p>See you soon!</p>
+    </div>
+
+  </main>
+</div>
+</body>
+</html>
